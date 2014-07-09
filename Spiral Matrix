@@ -1,0 +1,47 @@
+public class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        ArrayList<Integer> list=new ArrayList<Integer>();
+        if(matrix==null||matrix.length==0){
+            return list;
+        }
+        int rowLength = matrix.length-1;
+        int colLength = matrix[0].length-1;
+        int rowmin=0, colmin=0, count = 0;
+        int maxNum = (rowLength+1)*(colLength+1);
+        
+        while(count<=maxNum&&rowmin<=rowLength&&colmin<=colLength){
+        for(int i=colmin;i<=colLength;i++){
+            list.add(matrix[rowmin][i]);
+            count++;
+        }
+            rowmin++;
+            if(count>=maxNum)
+            break;
+               
+        for(int j=rowmin;j<=rowLength;j++){
+            list.add(matrix[j][colLength]);
+            count++;
+        }
+            colLength--; 
+            if(count>=maxNum)
+            break;
+        
+        for(int i=colLength;i>=colmin;i--){
+            list.add(matrix[rowLength][i]);
+            count++;
+        }
+            rowLength--;
+            if(count>=maxNum)
+            break;
+        
+        for(int j=rowLength;j>=rowmin;j--){
+            list.add(matrix[j][colmin]);
+            count++;
+        }
+            colmin++;
+            if(count>=maxNum)
+            break;
+        }
+        return list;
+    }
+}
