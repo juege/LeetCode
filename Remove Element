@@ -1,0 +1,20 @@
+public class Solution {
+    public int removeElement(int[] A, int elem) {
+        if(A.length==0)
+            return 0;
+        else{
+            int j = 0, length = 0;
+            for(int i=0;i<A.length;){
+                    if(A[i]==elem)
+                        i++;
+                    else
+                        A[j++] = A[i++];
+                }
+                length = j;
+                while(j<A.length){
+                    A[j++] = 0;
+                }
+                return length;
+            }
+    }
+}
