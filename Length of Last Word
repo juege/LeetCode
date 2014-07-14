@@ -1,0 +1,32 @@
+public class Solution {
+    public int lengthOfLastWord(String s) {
+        if(s==null||s.length()==0)
+            return 0;
+        else{
+            int length = s.length();
+            char[] A = new char[length];
+            int top = 0;
+            while(top<length){
+                A[top] = s.charAt(top);
+                top++;
+            }
+            int number = 0;
+            int tag = 0;
+            top--;
+            while(top>=0){
+                if(A[top]==' '&&number == 0){
+                    top--;
+                }
+                else if(A[top]==' '&&tag ==1){
+                    break;
+                }
+                else{
+                    number++;
+                    top--;
+                    tag = 1;
+                }
+            }
+            return number;
+        }        
+    }
+}
