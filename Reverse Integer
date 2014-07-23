@@ -1,0 +1,31 @@
+public class Solution {
+    public int reverse(int x) {
+        if(x==0)
+            return 0;
+        int sum = 0;
+        int Rev = x;
+        if(x<0){
+            Rev = -x;
+        }
+        Integer r = Rev;
+        int length = r.toString().length();
+        int chushu = 1;
+        int chengshu = 1;
+        for(int i=0;i<(length-1);i++){
+            chushu *= 10;
+        }
+        int[] a = new int[length];
+        for(int j=0;j<length;j++){
+            a[j] = Rev/chushu;
+            Rev = Rev%chushu;
+            chushu /= 10;
+            sum = sum + a[j]*chengshu;
+            chengshu *= 10;
+        }
+        if(x<0)
+            return -sum;
+        else 
+            return sum;
+        
+    }
+}
