@@ -1,0 +1,71 @@
+/**
+ * Definition for binary tree
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public int sumNumbers(TreeNode root) {
+        if(root==null){
+            return 0;
+        }
+        return sum(root,0);
+    }
+        public int sum(TreeNode node,int x){
+            int val;
+            if(node.right==null && node.left==null){
+                val = x*10 + node.val;
+            }
+            else{
+                val = 0;
+                if(node.right!=null){
+                    val += sum(node.right,x*10+node.val);
+                }
+                if(node.left!=null){
+                    val += sum(node.left,x*10+node.val);
+                }
+            }
+            return val;
+        }
+        
+}
+
+
+
+
+
+wrong answear
+
+public class Solution {
+    public int sumNumbers(TreeNode root) {
+        LinkedList<TreeNode> stack = new LinkedList<TreeNode>();
+        LinkedList<Integer> number = new LinkedList<Integer>();
+        int sum = 0;
+        if(root == null)
+            return sum;
+        stack.add(root);
+        while(!stack.isEmpty()){
+            TreeNode temp = stack.get(stack.size()-1);
+            stack.remove(stack.size()-1);
+            number.add(temp.val);
+            if(temp.right!=null){
+                stack.add(temp.right);
+            }
+            if(temp.left!=null){
+                stack.add(temp.left);
+            }
+            if(temp.right==null&&temp.left==null&&!number.isEmpty()){
+                int k = 1;
+                for(int n=number.size()-1;n>=0;n--){
+                    sum += number.get(n)*k;
+                    k = k*10;
+                }
+                number.remove(number.size()-1);
+            }
+        }
+        return sum;
+    }
+}
