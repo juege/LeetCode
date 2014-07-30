@@ -1,0 +1,27 @@
+public class Solution {
+    public List<Integer> getRow(int rowIndex) {
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        rowIndex++;
+        for (int i=0; i<rowIndex; ++i){
+            list.add(1);
+        }
+        if(rowIndex>2){
+            for(int i=1;i<rowIndex-1;i++){
+                int j = 1;
+                int temp = list.get(j-1);
+                while(j<=i){
+                        if(j==rowIndex-1){
+                        }
+                        else{
+                            int right = list.get(j);
+                            int left = temp;
+                            temp = list.get(j);
+                            list.set(j,right+left);
+                        }
+                        j++;
+                }   
+            }
+        }
+        return list;
+    }
+}
