@@ -1,0 +1,46 @@
+/**
+ * Definition for binary tree
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public void flatten(TreeNode root) {
+        if(root==null) return ;
+        else if(root.left==null&&root.right==null){
+        }
+        else{
+            if(root.left!=null&&root.right!=null){
+                TreeNode last = findLast(root.left);
+                TreeNode tempRight = root.right;
+                flatten(root.left);
+                flatten(root.right);
+                root.right = root.left;
+                last.right = tempRight;
+                root.left = null;
+            }
+            else if(root.left!=null&&root.right==null){
+                flatten(root.left);
+                root.right = root.left;
+                root.left = null;
+            }
+            else{
+                flatten(root.right);
+                root.left=null;
+            }
+        }
+    }
+    public TreeNode findLast(TreeNode node){
+        TreeNode last = node;
+        while(last.right!=null||last.left!=null){
+            if(last.right!=null) last = last.right;
+            else if(last.right==null&&last.left!=null)last = last.left;
+            else{
+            }
+        }
+        return last;
+    }
+}
