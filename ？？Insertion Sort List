@@ -1,0 +1,90 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode insertionSortList(ListNode head) {
+        if(head==null||head.next==null){
+            return head;
+        }
+        ListNode c = head.next;
+        head.next = null;
+        ListNode pre = head;
+        ListNode first,last,tempfirst;
+        ListNode templast = new ListNode(0);
+        while(c!=null){
+            last = c;
+            first = c.next;
+            templast.next = c;
+            tempfirst = c;
+            c = c.next;
+            while(first!=null){
+                if(first.val>tempfirst.val){
+                    tempfirst = first;
+                    templast = last;
+                }
+                last = first;
+                first = first.next;
+            }
+            templast.next = tempfirst.next;
+            pre.next = tempfirst;
+            pre = tempfirst;
+            pre.next = null;
+        }
+        return head;
+    }
+}
+
+
+
+
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode insertionSortList(ListNode head) {
+        if(head==null||head.next==null){
+            return head;
+        }
+        ListNode c = head.next;
+        ListNode pre = new ListNode(0);
+        pre.next = c;
+        while(c!=null){
+            ListNode a = c;
+            ListNode temp = c;
+            while(temp.next!=null){
+                if(temp.next.val<a.val){
+                    a=temp;
+                }
+                temp = temp.next;
+            }
+            if(c==a){
+                pre = c;
+                c = c.next;
+            }
+            else{
+                pre.next = a.next;
+                a.next.next = a.next;
+                pre = pre.next;
+                pre.next=c;
+            }
+        }
+        return head;
+    }
+}
