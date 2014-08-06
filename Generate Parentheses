@@ -1,0 +1,31 @@
+public class Solution {
+    public List<String> generateParenthesis(int n) {
+        ArrayList<String> list = new ArrayList<String>();
+        StringBuffer str = new StringBuffer();
+        list =  addString(str,n,0,0);
+        return list;
+    }
+    public ArrayList<String> addString(StringBuffer str,int n,int in,int out){
+        ArrayList<String> list = new ArrayList<String>();
+        if(n==0){
+            if(in==out){
+                list.add(str.toString());
+            }
+            //(in>out)
+            else{
+                str.append(')');
+                list.addAll(addString(str,n,in,out+1));
+            }
+        }
+        else{
+            StringBuffer newStr=new StringBuffer(str);
+            str.append('(');
+            list.addAll(addString(str,n-1,in+1,out));
+            if(in>out){
+                newStr.append(')');
+                list.addAll(addString(newStr,n,in,out+1));
+            }
+        }
+        return list;
+    }
+}
