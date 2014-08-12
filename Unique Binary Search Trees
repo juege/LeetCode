@@ -1,0 +1,22 @@
+public class Solution {
+    public int numTrees(int n) {
+        int sum = 0;
+        if(n<=2){
+            return n;
+        }
+        else{
+            
+            for(int i=1;i<=n;i++){
+                if(i==1){
+                    sum += numTrees(n-i); 
+                }
+                else if((n-i)==0){
+                    sum += numTrees(i-1); 
+                }
+                else
+                    sum += numTrees(i-1)*numTrees(n-i); 
+            }
+        }
+        return sum;
+    }
+}
