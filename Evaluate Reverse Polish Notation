@@ -1,0 +1,39 @@
+public class Solution {
+    public int evalRPN(String[] tokens) {
+        int length = tokens.length;
+        if(length==0)
+            return 0;
+        String[] stack = new String[length];
+        int j =0;
+        int sum=0;
+        int a,b;
+        String fuhao = "";
+        for(int i=0;i<length;i++){
+            if(tokens[i].equals("+")||tokens[i].equals("-")||tokens[i].equals("*")||tokens[i].equals("/")){
+                b = Integer.parseInt(stack[--j]);
+                a = Integer.parseInt(stack[--j]);
+                fuhao = tokens[i].trim();
+                switch(fuhao){
+                case "+":
+                    sum = a + b;
+                    break;
+                case "-":
+                    sum = a - b;
+                    break;
+                case "*":
+                    sum = a * b;
+                    break;
+                case "/":
+                    sum = a/b;
+                    break;
+                }
+                    stack[j++] = sum+"";
+            }
+            else{
+                stack[j++] = tokens[i];
+            }    
+            
+        }
+        return Integer.parseInt(stack[--j]);
+    }
+}
