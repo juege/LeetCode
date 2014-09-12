@@ -1,0 +1,63 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        if(head==null||head.next==null)
+            return head;
+        ListNode pre = new ListNode(0);
+        ListNode newhead = new ListNode(0);
+        newhead.next = null;
+        pre.next = null;
+        ListNode p = head;
+        while(p!=null){
+                if(p.next!=null){        
+                        if(p.val==p.next.val){
+                            if(p.next.next!=null){
+                                if(p.next.next.val==p.next.val)
+                                    p = p.next;
+                                else
+                                    p = p.next.next;
+                            }
+                            else{
+                                pre.next = null;
+                                break;
+                            }
+                        }
+                        else{
+                            if(pre.next==null){
+                                newhead.next = p; 
+                                pre.next = p;
+                                pre = p;
+                            }
+                            else{
+                                pre.next = p;
+                                pre = p;
+                            }
+                            p = p.next;
+                        }    
+                    }
+                else{
+                    if(pre.next==null){
+                                newhead.next = p; 
+                                pre.next = p;
+                                pre = p;
+                        }
+                        else{
+                            pre.next = p;
+                            pre = p;
+                        }
+                        p = p.next;
+                    }    
+        }
+        return newhead.next; 
+    }
+}
