@@ -1,0 +1,28 @@
+public class Solution {
+    public int maxProfit(int[] prices) {
+            int size = prices.length;
+            if(size==0){
+                return 0;
+            }
+            int a[] = new int[size];
+            for(int i=0;i<prices.length-1;i++){
+                a[i] = prices[i+1]-prices[i];             
+            }
+            int max = a[0];
+            int maxnow = a[0];
+            for(int i=1;i<a.length;i++){
+                if(maxnow>=0){
+                    maxnow += a[i];
+                    max = maxnow>max?maxnow:max;
+                }
+                if(maxnow<0){
+                    maxnow = a[i];
+                    max = maxnow>max?maxnow:max;
+                }
+            }     
+            if(max<0)
+                return 0;
+            else
+                return max;
+    }
+}
