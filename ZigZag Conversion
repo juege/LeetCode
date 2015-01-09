@@ -1,0 +1,52 @@
+public class Solution {
+    public String convert(String s, int nRows) {
+        if(nRows==1){
+        	return s;
+        }
+        StringBuffer buf = new StringBuffer();
+		int length = s.length();
+        int a = nRows*2-2;
+        int b = length%a;
+        int c = 0;
+        if(b==0){
+            c = 0;
+        }
+        else if(b<=nRows){
+            c = 1;
+        }else{
+            c = b-nRows+1;;
+        }
+        char[][] temp = new char[nRows][length/a*(1+a-nRows)+c];
+        for(int n=0;n<nRows;n++){
+        	for(int m=0;m<length/a*(1+a-nRows)+c;m++){
+        		temp[n][m]=' ';
+        	}
+        }
+        int i=1,j=1,number=1;
+        int k = 0;
+        while(number<=length){
+        	temp[i-1][j-1]  = s.charAt(number-1);    
+            
+            k = number%(2*nRows-2);
+            if(k==0){
+            	i=1;j++;
+            }else{
+            	if(k<nRows){
+            		i++;
+            	}else{
+            		i--;
+            		j++;
+            	}
+            }
+            number++;
+        }
+        for(int n=0;n<nRows;n++){
+        	for(int m=0;m<length/a*(1+a-nRows)+c;m++){
+        		if(temp[n][m]!=' ')
+        		buf.append(temp[n][m]);
+        	}
+        }
+        return buf.toString().trim();
+        
+    }
+}
