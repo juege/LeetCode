@@ -1,0 +1,22 @@
+public class Solution {
+    public int firstMissingPositive(int[] A) {
+
+        int result = 1;
+        Map<Integer,Integer> mapA = new HashMap<Integer,Integer>();
+        for(int i=0;i<=A.length+1;i++){
+            mapA.put(i, -1);
+        }
+        for(int i=0;i<A.length;i++){
+            if(A[i]>=0&&A[i]<=A.length)
+                mapA.put(A[i], -2);
+        }
+        for(int i=1;i<=A.length+1;i++){
+        	if(mapA.get(i)==-1){
+        		result = i;
+        		break;
+        	}
+        }
+        return result;
+                
+    }
+}
