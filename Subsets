@@ -1,0 +1,21 @@
+public class Solution {
+	public ArrayList<List<Integer>> subsets(int[] S) {
+		ArrayList<List<Integer>> list = new ArrayList<List<Integer>>();
+        int length = (int) Math.pow(2,S.length);
+        Arrays.sort(S);
+        for(int i=0;i<length;i++){
+        	List<Integer> one = new ArrayList<Integer>();
+        	int judge = i;
+        	int index = 0;
+        	while(index<S.length){
+        		if((judge&1)==1){
+        			one.add(S[index]);
+        		}
+        		index++;
+        		judge = judge>>1;
+        	}
+        	list.add(one);
+        }
+        return list;
+    }
+}
