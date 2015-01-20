@@ -1,0 +1,87 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+public ListNode mergeKLists(List<ListNode> lists) {
+    	if(lists==null||lists.size()==0){
+    	    return null;
+    	}
+    	if(lists.size()<2){
+    		return lists.get(0);
+    	}
+    	/*int mid = (lists.size() - 1)/2 ;
+        ListNode l1 = mergeKLists(lists.subList(0,mid + 1)) ;
+        ListNode l2 = mergeKLists(lists.subList(mid + 1,lists.size())) ;
+*/
+        int mid = (lists.size())/2 ;
+        ListNode l1 = mergeKLists(lists.subList(0,mid)) ;
+        ListNode l2 = mergeKLists(lists.subList(mid,lists.size())) ;
+        return MergeTwoList(l1,l2) ;
+
+    	/*int mid = lists.size()/2;
+    	ListNode la = MergeTwoList(lists.get(0),lists.get(mid-1));
+    	ListNode lb = MergeTwoList(lists.get(mid),lists.get(lists.size()-1));
+    	
+    	return MergeTwoList(la,lb);*/
+    }
+    
+    public ListNode MergeTwoList(ListNode one,ListNode two){
+        if(one==null&&two==null){
+    		return null;
+    	}
+    	if(one==null){
+    		return two;
+    	}
+    	if(two==null){
+    		return one;
+    	}
+
+    	
+    	ListNode head = new ListNode(0);
+    	ListNode start = new ListNode(0);
+    	if(one.val<=two.val){
+    		head = one;
+    		start = one;
+    		one = one.next;
+    	}else{
+    		head = two;
+    		start = two;
+    		two = two.next;
+    	}
+    	while(one!=null&&two!=null){
+    		if(one.val<=two.val){
+    			head.next = one;
+    			
+    			one = one.next;
+    		}else{
+    			head.next = two;
+    			two = two.next;
+    		}
+    		head = head.next;
+    	}
+    	if(one==null&&two!=null){
+    		while(two!=null){
+    			head.next = two;
+    			two = two.next;
+    			head = head.next;
+    		}
+    	}
+    	if(two==null&&one!=null){
+    		while(one!=null){
+    			head.next = one;
+    			one = one.next;
+    			head = head.next;
+    		}
+    		
+    	}    	
+    	return start;
+    }
+}
