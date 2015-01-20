@@ -1,0 +1,33 @@
+public class Solution {
+public  boolean canJump(int[] A) {
+    	if(A.length==1)
+    		return true;
+        int end  = 0;
+        int start = 0;
+        end =start + A[start];
+        while(findMax(A,start,end)<A.length-1){
+        	if(findMax(A,start,end)==end)
+        		break;
+        	int temp = start;
+        	start = end;
+        	end = findMax(A,temp,end);
+        }
+        if(findMax(A,start,end)<A.length-1){
+        	return false;
+        }else{
+        	return true;
+        }
+    }
+    public  int findMax(int[] A ,int start,int step){
+		int max = step;
+		if(max>=A.length){
+			return A.length;
+		}
+		for(int i=start;i<=step;i++){
+			if(i+A[i]>max){
+				max = i+A[i];
+			}
+		}
+		return max;
+	}
+}
