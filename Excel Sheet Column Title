@@ -1,0 +1,29 @@
+public class Solution {
+ public  String convertToTitle(int n) {
+        int i;
+        StringBuffer str = new StringBuffer();
+
+    	while(n>0){
+            if(n<27){
+            	str.append(change(n));
+            	break;
+            }
+        	i = n%26;
+        	if(i>=0){
+        		if(i==0){
+        			i=26;
+        		}
+        		str.append(change(i));
+        	}
+        	n = n/26;
+        	if(i==26)
+        		n--;
+        }
+    	str.reverse();
+    	return str.toString();
+    }
+	public  char change(int i){
+		char c = (char)(i+64);
+		return c;
+	}
+}
