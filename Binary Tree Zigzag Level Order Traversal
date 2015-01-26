@@ -1,0 +1,44 @@
+public class BinaryTreeZigzagLevelOrderTraversa {
+	public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+
+		List<List<Integer>> lists = new ArrayList<List<Integer>>();
+		if(root==null){
+			return lists;
+		}
+		Stack<TreeNode> a = new Stack<TreeNode>();
+		Stack<TreeNode> b = new Stack<TreeNode>();
+		a.add(root);
+		int i = 0;
+		while(!a.isEmpty()||!b.isEmpty()){
+			List<Integer> list = new ArrayList<Integer>();
+			
+			if(i==0){
+				while(!a.isEmpty()){
+					TreeNode temp = a.pop();
+					list.add(temp.val);
+					if(temp.left!=null){
+						b.add(temp.left);
+					}
+					if(temp.right!=null){
+						b.add(temp.right);
+					}
+				}
+				i = 1;
+			}else{
+				while(!b.isEmpty()){
+					TreeNode temp = b.pop();
+					list.add(temp.val);
+					if(temp.right!=null){
+						a.add(temp.right);
+					}
+					if(temp.left!=null){
+						a.add(temp.left);
+					}
+				}
+				i = 0;
+			}
+			lists.add(list);
+		}
+		return lists;
+    }
+}
